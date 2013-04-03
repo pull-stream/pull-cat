@@ -1,0 +1,21 @@
+{
+  "name": "pull-cat",
+  "description": "",
+  "version": "0.0.0",
+  "homepage": "https://github.com/dominictarr/pull-cat",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dominictarr/pull-cat.git"
+  },
+  "dependencies": {
+    "pull-stream": "~2.8.0"
+  },
+  "devDependencies": {
+    "tape": "~0.3.3"
+  },
+  "scripts": {
+    "test": "set -e; for t in test/*.js; do node $t; done"
+  },
+  "author": "Dominic Tarr <dominic.tarr@gmail.com> (http://dominictarr.com)",
+  "license": "MIT"
+}
