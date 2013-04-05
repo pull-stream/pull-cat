@@ -8,7 +8,7 @@
     "url": "git://github.com/dominictarr/pull-cat.git"
   },
   "dependencies": {
-    "pull-stream": "~2.9"
+    "pull-stream": "~2.10"
   },
   "devDependencies": {
     "tape": "~0.3.3"
