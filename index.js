@@ -16,7 +16,7 @@ module.exports = pull.Source(function (streams) {
 
   return function (abort, cb) {
     ;(function next () {
-      if(abort) 
+      if(abort)
         all(streams, abort, cb)
       else if(!streams.length)
           cb(true)
