@@ -1,6 +1,6 @@
 {
   "name": "pull-cat",
-  "description": "",
+  "description": "concatenate pull-streams",
   "version": "1.0.0",
   "homepage": "https://github.com/dominictarr/pull-cat",
   "repository": {
@@ -8,7 +8,7 @@
     "url": "git://github.com/dominictarr/pull-cat.git"
   },
   "dependencies": {
-    "pull-stream": "~2.8.0"
+    "pull-stream": "~2.9"
   },
   "devDependencies": {
     "tape": "~0.3.3"
