@@ -3,8 +3,10 @@ var pull = require('pull-stream')
 function all(ary, abort, cb) {
   var n = ary.length
   ary.forEach(function (f) {
-    f(abort, next)
+    if(f) f(abort, next)
+    else next()
   })
+
   function next() {
     if(--n) return
     cb(abort)
