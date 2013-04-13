@@ -20,10 +20,12 @@ module.exports = pull.Source(function (streams) {
         all(streams, abort, cb)
       else if(!streams.length)
           cb(true)
+      else if(!streams[0])
+        streams.shift(), next()
       else
         streams[0](null, function (err, data) {
           if(err) {
-            streams.shift();
+              streams.shift()
             if(err !== true)
               abort = err
             next()
