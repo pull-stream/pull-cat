@@ -1,4 +1,4 @@
-var pull = require('pull-stream')
+var pull = require('pull-core')
 
 function all(ary, abort, cb) {
   var n = ary.length
@@ -15,7 +15,6 @@ function all(ary, abort, cb) {
 }
 
 module.exports = pull.Source(function (streams) {
-
   return function (abort, cb) {
     ;(function next () {
       if(abort)
