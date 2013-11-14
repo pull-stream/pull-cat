@@ -27,8 +27,13 @@ module.exports = pull.Source(function (streams) {
         streams[0](null, function (err, data) {
           if(err) {
               streams.shift()
-            if(err !== true)
+            if(err !== true) {
               abort = err
+              //abort all streams
+              while(streams.length)
+                streams.shift()(err, function () {})
+              cb(err)
+            }
             next()
           }
           else
