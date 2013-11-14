@@ -11,7 +11,7 @@
     "pull-core": "~1.0.0"
   },
   "devDependencies": {
-    "pull-stream": "~2.18",
+    "pull-stream": "~2.20",
     "tape": "~1.0"
   },
   "scripts": {
