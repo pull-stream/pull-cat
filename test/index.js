@@ -3,7 +3,8 @@
 var pull = require('pull-stream')
 var cat = require('../')
 var test = require('tape')
-
+var Pushable = require('pull-pushable')
+var Abortable = require('pull-abortable')
 test('cat', function (t) {
 
   pull(
@@ -73,4 +74,33 @@ test('error', function (t) {
       t.end()
     })
   )
+})
+
+test('abort stalled', function (t) {
+  var err = new Error('intentional'), n = 2
+  var abortable = Abortable()
+  var pushable = Pushable(function (_err) {
+    t.equal(_err, err)
+    next()
+  })
+
+  pushable.push(4)
+
+  pull(
+    cat([pull.values([1,2,3]), undefined, pushable]),
+    abortable,
+    pull.drain(function (item) {
+      if(item == 4)
+        process.nextTick(function () {
+          abortable.abort(err)
+        })
+    }, function (err) {
+      next()
+    })
+  )
+
+  function next () {
+    if(--n) return
+    t.end()
+  }
 })
