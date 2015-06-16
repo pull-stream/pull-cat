@@ -2,6 +2,7 @@ var pull = require('pull-core')
 
 function all(ary, abort, cb) {
   var n = ary.length
+  if(!n) return cb(abort)
   ary.forEach(function (f) {
     if(f) f(abort, next)
     else next()
