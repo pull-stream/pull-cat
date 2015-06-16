@@ -104,3 +104,10 @@ test('abort stalled', function (t) {
     t.end()
   }
 })
+
+test('abort empty', function (t) {
+  cat([])(true, function (end) {
+    t.equal(end, true)
+    t.end()
+  })
+})
