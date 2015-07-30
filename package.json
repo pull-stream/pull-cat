@@ -1,7 +1,7 @@
 {
   "name": "pull-cat",
   "description": "concatenate pull-streams",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "homepage": "https://github.com/dominictarr/pull-cat",
   "repository": {
     "type": "git",
