@@ -1,4 +1,5 @@
 var pull = require('pull-core')
+var noop = function () {}
 
 function all(ary, abort, cb) {
   var n = ary.length
@@ -21,18 +22,18 @@ module.exports = pull.Source(function (streams) {
       if(abort)
         all(streams, abort, cb)
       else if(!streams.length)
-          cb(true)
+        cb(true)
       else if(!streams[0])
         streams.shift(), next()
       else
         streams[0](null, function (err, data) {
           if(err) {
-              streams.shift()
+            streams.shift()
             if(err !== true) {
               abort = err
               //abort all streams
               while(streams.length)
-                streams.shift()(err, function () {})
+                (streams.shift() || noop)(err, noop)
               cb(err)
             }
             next()
@@ -40,6 +41,6 @@ module.exports = pull.Source(function (streams) {
           else
             cb(null, data)
         })
-      })()
+    })()
   }
 })

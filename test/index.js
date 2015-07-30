@@ -111,3 +111,16 @@ test('abort empty', function (t) {
     t.end()
   })
 })
+
+test('error + undefined', function (t) {
+  var err = new Error('test error')
+  pull(
+    cat([pull.values([1,2,3]), function (_, cb) {
+      cb(err)
+    }, undefined]),
+    pull.collect(function (_err) {
+      t.equal(_err, err)
+      t.end()
+    })
+  )
+})
