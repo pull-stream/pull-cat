@@ -7,14 +7,11 @@
     "type": "git",
     "url": "git://github.com/dominictarr/pull-cat.git"
   },
-  "dependencies": {
-    "pull-core": "~1.0.0"
-  },
   "devDependencies": {
-    "pull-stream": "~2.20",
-    "tape": "~1.0",
+    "pull-abortable": "~4.1.0",
     "pull-pushable": "~1.1.4",
-    "pull-abortable": "~4.1.0"
+    "pull-stream": "^3.1.0",
+    "tape": "^4.4.0"
   },
   "scripts": {
     "test": "set -e; for t in test/*.js; do node $t; done"
