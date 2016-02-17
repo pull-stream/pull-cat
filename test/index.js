@@ -70,6 +70,7 @@ test('error', function (t) {
       cb(err)
     }]),
     pull.collect(function (_err) {
+      console.log('COLLECT END', _err)
       t.equal(_err, err)
       t.end()
     })
@@ -124,3 +125,25 @@ test('error + undefined', function (t) {
     })
   )
 })
+
+test('abort streams after error', function (t) {
+  var err = new Error('test error')
+  var aborted = false
+  pull(
+    cat([pull.values([1,2,3]), function (_, cb) {
+      cb(err)
+    }, function (_err, cb) {
+      //this stream should be aborted.
+      aborted = true
+      t.strictEqual(_err, err)
+      cb()
+    }]),
+    pull.collect(function (_err) {
+      t.equal(aborted, true)
+      t.equal(_err, err)
+      t.end()
+    })
+  )
+})
+
+
