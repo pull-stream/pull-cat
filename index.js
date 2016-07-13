@@ -1,4 +1,3 @@
-var pull = require('pull-core')
 var noop = function () {}
 
 function all(ary, abort, cb) {
@@ -16,7 +15,7 @@ function all(ary, abort, cb) {
   if(!n) next()
 }
 
-module.exports = pull.Source(function (streams) {
+module.exports = function pullCat (streams) {
   return function (abort, cb) {
     ;(function next () {
       if(abort)
@@ -43,4 +42,4 @@ module.exports = pull.Source(function (streams) {
         })
     })()
   }
-})
+}
