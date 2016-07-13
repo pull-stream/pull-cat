@@ -1,13 +1,12 @@
 {
   "name": "pull-cat",
   "description": "concatenate pull-streams",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "homepage": "https://github.com/pull-stream/pull-cat",
   "repository": {
     "type": "git",
     "url": "git://github.com/pull-stream/pull-cat.git"
   },
-  "dependencies": {},
   "devDependencies": {
     "pull-abortable": "~4.1.0",
     "tape": "~1.0",
@@ -20,3 +19,6 @@
   "author": "Dominic Tarr <dominic.tarr@gmail.com> (http://dominictarr.com)",
   "license": "MIT"
 }
+
+
+
