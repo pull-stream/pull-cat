@@ -10,13 +10,12 @@
   "dependencies": {},
   "devDependencies": {
     "pull-abortable": "~4.1.0",
+    "tape": "~1.0",
     "pull-pushable": "~1.1.4",
-    "pull-stream": "^3.4.2",
-    "standard": "^7.1.2",
-    "tape": "^4.6.0"
+    "pull-stream": "^3.4.2"
   },
   "scripts": {
-    "test": "standard && tape test/*.js"
+    "test": "set -e; for t in test/*.js; do node $t; done"
   },
   "author": "Dominic Tarr <dominic.tarr@gmail.com> (http://dominictarr.com)",
   "license": "MIT"

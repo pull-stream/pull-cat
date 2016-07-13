@@ -6,11 +6,11 @@ var Abortable = require('pull-abortable')
 
 test('cat', function (t) {
   pull(
-    cat([pull.values([1, 2, 3]), pull.values([4, 5, 6])]),
+    cat([pull.values([1,2,3]), pull.values([4,5,6])]),
     pull.collect(function (err, ary) {
       console.log(err, ary)
       t.notOk(err)
-      t.deepEqual(ary, [1, 2, 3, 4, 5, 6])
+      t.deepEqual(ary, [1,2,3,4,5,6])
       t.end()
     })
   )
@@ -18,11 +18,11 @@ test('cat', function (t) {
 
 test('cat - with empty', function (t) {
   pull(
-    cat([pull.values([1, 2, 3]), null, pull.values([4, 5, 6])]),
+    cat([pull.values([1,2,3]), null, pull.values([4,5,6])]),
     pull.collect(function (err, ary) {
       console.log(err, ary)
       t.notOk(err)
-      t.deepEqual(ary, [1, 2, 3, 4, 5, 6])
+      t.deepEqual(ary, [1,2,3,4,5,6])
       t.end()
     })
   )
@@ -30,27 +30,25 @@ test('cat - with empty', function (t) {
 
 test('cat - with empty stream', function (t) {
   var ended = false
-  var justEnd = function (err, cb) {
-    t.notOk(err)
-    ended = true
-    cb(true)
-  }
+  var justEnd = function (err, cb) { ended = true; cb(true) }
 
   pull(
-    cat([pull.values([1, 2, 3]), justEnd, pull.values([4, 5, 6])]),
+    cat([pull.values([1,2,3]), justEnd, pull.values([4,5,6])]),
     pull.collect(function (err, ary) {
       console.log(err, ary)
       t.ok(ended)
       t.notOk(err)
-      t.deepEqual(ary, [1, 2, 3, 4, 5, 6])
+      t.deepEqual(ary, [1,2,3,4,5,6])
       t.end()
     })
   )
 })
 
+
+
 test('abort - with empty', function (t) {
   pull(
-    cat([pull.values([1, 2, 3]), null, pull.values([4, 5, 6])]),
+    cat([pull.values([1,2,3]), null, pull.values([4,5,6])]),
     function (read) {
       read(true, function (err) {
         t.equal(err, true)
@@ -63,7 +61,7 @@ test('abort - with empty', function (t) {
 test('error', function (t) {
   var err = new Error('test error')
   pull(
-    cat([pull.values([1, 2, 3]), function (_, cb) {
+    cat([pull.values([1,2,3]), function (_, cb) {
       cb(err)
     }]),
     pull.collect(function (_err) {
@@ -74,8 +72,7 @@ test('error', function (t) {
 })
 
 test('abort stalled', function (t) {
-  var err = new Error('intentional')
-  var n = 2
+  var err = new Error('intentional'), n = 2
   var abortable = Abortable()
   var pushable = Pushable(function (_err) {
     t.equal(_err, err)
@@ -85,22 +82,20 @@ test('abort stalled', function (t) {
   pushable.push(4)
 
   pull(
-    cat([pull.values([1, 2, 3]), undefined, pushable]),
+    cat([pull.values([1,2,3]), undefined, pushable]),
     abortable,
     pull.drain(function (item) {
-      if (item === 4) {
+      if(item == 4)
         process.nextTick(function () {
           abortable.abort(err)
         })
-      }
     }, function (err) {
-      t.notOk(err)
       next()
     })
   )
 
   function next () {
-    if (--n) return
+    if(--n) return
     t.end()
   }
 })
@@ -115,7 +110,7 @@ test('abort empty', function (t) {
 test('error + undefined', function (t) {
   var err = new Error('test error')
   pull(
-    cat([pull.values([1, 2, 3]), function (_, cb) {
+    cat([pull.values([1,2,3]), function (_, cb) {
       cb(err)
     }, undefined]),
     pull.collect(function (_err) {
@@ -128,12 +123,12 @@ test('error + undefined', function (t) {
 test.only('take cat', function (t) {
   pull(
     cat([
-      pull(pull.values([1, 2, 3]), pull.take(2)),
-      pull(pull.values([8, 7, 6, 5]), pull.take(3))
+      pull(pull.values([1,2,3]), pull.take(2)),
+      pull(pull.values([8,7,6,5]), pull.take(3)),
     ]),
     pull.collect(function (err, data) {
       t.error(err)
-      t.deepEqual(data, [1, 2, 8, 7, 6])
+      t.deepEqual(data, [1,2,8,7,6])
       t.end()
     })
   )
