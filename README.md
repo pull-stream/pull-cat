@@ -1,15 +1,16 @@
 # pull-cat
 
-concatenate pull-streams
+> Concatenate pull-streams
 
-<<<<<<< HEAD
+## Install
+
 ```shell
 npm install --save pull-cat
 ```
 
-## example
-=======
-construct a new source stream from a sequential list of source streams,
+## Example
+
+Construct a new source stream from a sequential list of source streams,
 reading from each one in turn until it ends, then the next, etc.
 If one stream errors, then the rest of the streams are aborted immediately.
 If the cat stream is aborted (i.e. if it's sink errors) then all the streams
@@ -18,13 +19,9 @@ are aborted.
 A cat stream is a moderately challenging stream to implement,
 especially in the context of error states.
 
-# example
->>>>>>> master
-
 ```js
 var cat = require('pull-cat')
 var pull = require('pull-stream')
-<<<<<<< HEAD
 
 pull(
   cat([
@@ -39,16 +36,10 @@ pull(
 // 4
 // 5
 // 6
-=======
-pull(
-  cat([pull.values([1,2,3]), pull.values([4,5,6])]),
-  sink...
-)
->>>>>>> master
 ```
 
 
-## api
+## Api
 
 ### `cat = require('pull-cat')`
 
@@ -63,5 +54,3 @@ then callback to the aborter.
 ## License
 
 MIT
-
-

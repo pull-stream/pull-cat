@@ -9,8 +9,8 @@
   },
   "devDependencies": {
     "pull-abortable": "~4.1.0",
-    "tape": "~1.0",
-    "pull-pushable": "~1.1.4",
+    "tape": "~4.6",
+    "pull-pushable": "~2.0.1",
     "pull-stream": "^3.4.2"
   },
   "scripts": {
